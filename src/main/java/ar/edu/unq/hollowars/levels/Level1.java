@@ -45,12 +45,25 @@ public class Level1 extends GameScene {
 			System.out.println("me rompo");
 		}	
 		for (String[] linea : waves) {
-			for (int i = 0; i < linea[1];  i++) {
-				String string = linea[i];
-				enemy = new EnemyShip()
-						.setStartingX(linea[3])
-						.setStartingY(linea[4])
-						.setSpawnTime(linea[0]);
+			for (int i = 0; i < Integer.parseInt(linea[2]);  i++) {
+				try {
+					enemy = ((EnemyShip) Class.forName("ar.edu.unq.hollowars.components."+linea[1]).newInstance())
+							.setStartingX(Integer.parseInt(linea[3]))
+							.setStartingY(Integer.parseInt(linea[4]))
+							.setSpawnTime(Integer.parseInt(linea[0]));
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 					
 					this.addEnemy(enemy);
 

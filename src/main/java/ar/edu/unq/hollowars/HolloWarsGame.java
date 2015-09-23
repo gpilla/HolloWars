@@ -13,24 +13,18 @@ import ar.edu.unq.hollowars.parser.ReadCSV;
 public class HolloWarsGame extends Game{
 
 	public static void main(String[] args) {
-		ArrayList<String[]> waves2 = null;
-		try {
-			waves2 = new ReadCSV("lvl12.csv").run();
-
-		} catch (Exception e) {
-			System.out.println("me rompo");
-		}
-			System.out.println(waves2.size());
-		for (String[] strings : waves2) {
-			System.out.println(strings[1]);
-		}
-
-		
-//		new DesktopGameLauncher(new HolloWarsGame()).launch();
+				
+		new DesktopGameLauncher(new HolloWarsGame()).launch();
 	}
 	
 	@Override
 	protected void initializeResources() {
+		this.initializeEnemies();
+		
+	}
+
+	private void initializeEnemies() {
+		// TODO Auto-generated method stub
 		
 	}
 
