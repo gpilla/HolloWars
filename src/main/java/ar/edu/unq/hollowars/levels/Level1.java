@@ -8,6 +8,7 @@ import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
 import ar.edu.unq.hollowars.components.ui.LifesLabel;
 import ar.edu.unq.hollowars.components.ui.PointsLabel;
+import ar.edu.unq.hollowars.parser.ReadCSV;
 
 public class Level1 extends GameScene {
 	
@@ -34,16 +35,25 @@ public class Level1 extends GameScene {
 	}
 
 	private void generateEnemies() {
+		
+		ArrayList<String[]> waves = null;
 		EnemyShip enemy = null;
-		for (int j = 0; j < 10; j++) {
-			for (int i = 0; i < 10; i++) {
-				double x = 100 * i;
+		
+		try {
+			waves = new ReadCSV("lvlConfigs/"+this.getClass().getSimpleName()+".csv").run();
+		} catch (Exception e) {
+			System.out.println("me rompo");
+		}	
+		for (String[] linea : waves) {
+			for (int i = 0; i < linea[1];  i++) {
+				String string = linea[i];
 				enemy = new EnemyShip()
-					.setStartingX(x)
-					.setStartingY(-30)
-					.setSpawnTime(3 * j);
-				
-				this.addEnemy(enemy);
+						.setStartingX(linea[3])
+						.setStartingY(linea[4])
+						.setSpawnTime(linea[0]);
+					
+					this.addEnemy(enemy);
+
 			}
 		}
 	}
