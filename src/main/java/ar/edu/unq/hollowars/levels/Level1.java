@@ -6,22 +6,46 @@ import com.uqbar.vainilla.GameScene;
 
 import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
+import ar.edu.unq.hollowars.components.ui.LifesLabel;
+import ar.edu.unq.hollowars.components.ui.PointsLabel;
 
 public class Level1 extends GameScene {
 	
 	private ArrayList<EnemyShip> enemyShips;
 	private PlayerShip playerShip;
+	private LifesLabel lifesLabel;
+	private PointsLabel pointsLabel;
 	
 	public Level1() {
 		this.setEnemies(new ArrayList<EnemyShip>());
 		
 		this.addComponent(new PlayerShip());
 		
-		this.addEnemy(new EnemyShip(100, 0));
-		this.addEnemy(new EnemyShip(200, 0));
-		this.addEnemy(new EnemyShip(300, 0));
-		this.addEnemy(new EnemyShip(400, 0));
-		this.addEnemy(new EnemyShip(500, 0));
+		generateEnemies();
+		
+		generateUI();
+	}
+
+	private void generateUI() {
+		lifesLabel = new LifesLabel(10, 10);
+		this.addComponent(lifesLabel);
+		pointsLabel = new PointsLabel(600, 10);
+		this.addComponent(pointsLabel);
+	}
+
+	private void generateEnemies() {
+		EnemyShip enemy = null;
+		for (int j = 0; j < 10; j++) {
+			for (int i = 0; i < 10; i++) {
+				double x = 100 * i;
+				enemy = new EnemyShip()
+					.setStartingX(x)
+					.setStartingY(-30)
+					.setSpawnTime(3 * j);
+				
+				this.addEnemy(enemy);
+			}
+		}
 	}
 	
 	public ArrayList<EnemyShip> getEnemyShips() {

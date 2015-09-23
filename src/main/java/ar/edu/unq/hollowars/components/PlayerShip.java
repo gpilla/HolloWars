@@ -66,19 +66,19 @@ public class PlayerShip extends GameComponent<Level1> {
 	}
 
 	public void left(double delta) {
-		this.setX(Math.max(this.getLeftLimit(), this.getX()- SPEED *delta));
+		this.setX(Math.max(this.getLeftLimit(), this.getX()- SPEED * delta));
 	}
 	
 	public void right(double delta) {
-		this.setX(Math.min(this.getRightLimit(), this.getX()+ SPEED *delta));
+		this.setX(Math.min(this.getRightLimit(), this.getX()+ SPEED * delta));
 	}
 
 	public void down(double delta) {
-		this.setY(Math.min(this.getBottomLimit(), this.getY() + SPEED *delta));
+		this.setY(Math.min(this.getBottomLimit(), this.getY() + SPEED * delta));
 	}
 	
 	public void up(double delta) {
-		this.setY(Math.max(this.getTopLimit() , this.getY()- SPEED *delta));
+		this.setY(Math.max(this.getTopLimit() , this.getY()- SPEED * delta));
 	}
 	
 	public double getLeftLimit()

@@ -16,11 +16,13 @@ public class EnemyShip extends GameComponent<Level1> {
 	private double maxSpeed = 500;
 	private double acceleration = 1.5;
 	private double i, j;
+	private double spawnTime;
 
-	public EnemyShip(double x, double y) {
+	public EnemyShip() {
 		this.setAppearance(new Rectangle(Color.RED, width, height));
-		this.setX(x);
-		this.setY(y);
+		this.setX(0);
+		this.setY(0);
+		this.setSpawnTime(spawnTime);
 
 		// Configuro en caida perpendicular
 		this.i = 0;
@@ -29,6 +31,15 @@ public class EnemyShip extends GameComponent<Level1> {
 
 	@Override
 	public void update(DeltaState deltaState) {
+		
+		if (checkSpawmColdDown(deltaState) ) {
+			move(deltaState);
+		}
+		
+		super.update(deltaState);
+	}
+
+	private void move(DeltaState deltaState) {
 		this.speed += this.acceleration + deltaState.getDelta();
 		double advanced = Math.min(this.maxSpeed, this.speed) * deltaState.getDelta();
 
@@ -37,8 +48,14 @@ public class EnemyShip extends GameComponent<Level1> {
 		if (this.getY() > this.getGame().getDisplayHeight()) {
 			this.getScene().destroyEnemyShip(this);
 		}
+	}
 
-		super.update(deltaState);
+	private boolean checkSpawmColdDown(DeltaState deltaState) {
+		if (this.getSpawnTime() > 0) {
+			this.setSpawnTime(this.getSpawnTime() - deltaState.getDelta());
+			return false;
+		}
+		return true;
 	}
 
 	public int getHeight() {
@@ -55,6 +72,25 @@ public class EnemyShip extends GameComponent<Level1> {
 
 	public void setWidth(int width) {
 		this.width = width;
+	}
+	
+	public EnemyShip setStartingX(double x) {
+		super.setX(x);
+		return this;
+	}
+	
+	public EnemyShip setStartingY(double y) {
+		super.setY(y);
+		return this;
+	}
+
+	public double getSpawnTime() {
+		return spawnTime;
+	}
+
+	public EnemyShip setSpawnTime(double spawnTime) {
+		this.spawnTime = spawnTime;
+		return this;
 	}
 
 }
