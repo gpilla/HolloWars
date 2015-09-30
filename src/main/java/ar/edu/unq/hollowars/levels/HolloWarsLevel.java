@@ -1,6 +1,5 @@
 package ar.edu.unq.hollowars.levels;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import com.uqbar.vainilla.GameScene;
@@ -9,24 +8,28 @@ import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
 import ar.edu.unq.hollowars.components.ui.LifesLabel;
 import ar.edu.unq.hollowars.components.ui.PointsLabel;
+import ar.edu.unq.hollowars.parser.ReadCSV;
 
-public class Level extends GameScene {
+public abstract class HolloWarsLevel extends GameScene {
 	
-	private ArrayList<EnemyShip> enemyShips;
-	private PlayerShip playerShip;
-	private int points;
-	private int lifes;
-	private LifesLabel lifesLabel;
-	private PointsLabel pointsLabel;
+	protected ArrayList<EnemyShip> enemyShips;
+	protected PlayerShip playerShip;
+	protected int points;
+	protected int lifes;
+	protected LifesLabel lifesLabel;
+	protected PointsLabel pointsLabel;
 	
-	public Level() {
-		generateUI();
+	@Override
+	public void onSetAsCurrent() {
+		enemyShips = new ArrayList<EnemyShip>();
+		super.onSetAsCurrent();
+		this.generateUI();
 		
 		this.setPoints(0);
 		this.setLifes(3);
 		
 		generatePlayer();
-		generateEnemies();		
+		generateEnemies();	
 	}
 
 	private void generatePlayer() {
@@ -41,18 +44,37 @@ public class Level extends GameScene {
 	}
 
 	private void generateEnemies() {
-		this.setEnemies(new ArrayList<EnemyShip>());
-		
+		ArrayList<String[]> waves = null;
 		EnemyShip enemy = null;
-		for (int j = 0; j < 1; j++) {
-			for (int i = 0; i < 10; i++) {
-				double x = 100 * i;
-				enemy = new EnemyShip()
-					.setStartingX(x)
-					.setStartingY(-30)
-					.setSpawnTime(3 * j);
-				
-				this.addEnemy(enemy);
+		
+		try {
+			waves = new ReadCSV("src/main/resources/config/levels/"+this.getClass().getSimpleName()+".csv").run();
+		} catch (Exception e) {
+			System.out.println("me rompo");
+		}	
+		for (String[] linea : waves) {
+			for (int i = 0; i < Integer.parseInt(linea[2]);  i++) {
+				try {
+					enemy = ((EnemyShip) Class.forName("ar.edu.unq.hollowars.components."+linea[1]).newInstance())
+							.setStartingX(Integer.parseInt(linea[3]))
+							.setStartingY(Integer.parseInt(linea[4]))
+							.setSpawnTime(Integer.parseInt(linea[0]));
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					
+					this.addEnemy(enemy);
+
 			}
 		}
 	}

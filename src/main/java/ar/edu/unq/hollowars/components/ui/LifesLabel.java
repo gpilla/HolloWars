@@ -7,9 +7,9 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Label;
 
-import ar.edu.unq.hollowars.levels.Level;
+import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
-public class LifesLabel extends GameComponent<Level> {
+public class LifesLabel extends GameComponent<HolloWarsLevel> {
 
 	private int value = 0;
 	

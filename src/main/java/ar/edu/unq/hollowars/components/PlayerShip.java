@@ -10,9 +10,9 @@ import com.uqbar.vainilla.colissions.CollisionDetector;
 import com.uqbar.vainilla.events.constants.Key;
 
 import ar.edu.unq.hollowars.components.ships.guns.Gun;
-import ar.edu.unq.hollowars.levels.Level;
+import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
-public class PlayerShip extends GameComponent<Level> {
+public class PlayerShip extends GameComponent<HolloWarsLevel> {
 	
 	public static final int SPEED = 300;
 	public static final int NAVE_HEIGHT = 50;

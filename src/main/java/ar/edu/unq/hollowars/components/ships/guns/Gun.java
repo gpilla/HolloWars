@@ -2,9 +2,9 @@ package ar.edu.unq.hollowars.components.ships.guns;
 
 import com.uqbar.vainilla.GameComponent;
 
-import ar.edu.unq.hollowars.levels.Level;
+import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
-public class Gun extends GameComponent<Level> {
+public class Gun extends GameComponent<HolloWarsLevel> {
 
 	public static final double COLD_DOWN_TIME = 0.1;
 	private double coldDown = 0;
@@ -13,7 +13,6 @@ public class Gun extends GameComponent<Level> {
 		if( this.coldDown(delta) ){
 			System.out.println("Shoot!!!!");
 			this.getScene().addComponent(new Bullet(this.getX(), this.getY()));
-			
 		}
 	}
 

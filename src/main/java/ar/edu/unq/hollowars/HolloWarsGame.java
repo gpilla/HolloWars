@@ -5,7 +5,8 @@ import java.awt.Dimension;
 import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
 
-import ar.edu.unq.hollowars.levels.Level;
+import ar.edu.unq.hollowars.levels.HolloWarsLevel;
+import ar.edu.unq.hollowars.levels.Level1;
 
 public class HolloWarsGame extends Game{
 
@@ -26,7 +27,7 @@ public class HolloWarsGame extends Game{
 
 	@Override
 	protected void setUpScenes() {
-		Level scene = new Level();
+		HolloWarsLevel scene = new Level1();
 		this.setCurrentScene(scene);
 	}
 

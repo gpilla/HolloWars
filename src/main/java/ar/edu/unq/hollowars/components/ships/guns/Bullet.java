@@ -6,9 +6,9 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Circle;
 
-import ar.edu.unq.hollowars.levels.Level;
+import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
-public class Bullet extends GameComponent<Level> {
+public class Bullet extends GameComponent<HolloWarsLevel> {
 	
 	private double speed = 100;
 	private double i, j;
