@@ -6,9 +6,9 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Rectangle;
 
-import ar.edu.unq.hollowars.levels.Level1;
+import ar.edu.unq.hollowars.levels.Level;
 
-public class EnemyShip extends GameComponent<Level1> {
+public class EnemyShip extends GameComponent<Level> {
 
 	private int height = 20;
 	private int width = 20;
@@ -46,7 +46,7 @@ public class EnemyShip extends GameComponent<Level1> {
 		this.move(this.i * advanced, this.j * advanced);
 
 		if (this.getY() > this.getGame().getDisplayHeight()) {
-			this.getScene().destroyEnemyShip(this);
+			this.setY(0);
 		}
 	}
 

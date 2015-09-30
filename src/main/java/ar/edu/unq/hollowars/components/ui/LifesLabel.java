@@ -7,7 +7,9 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Label;
 
-public class LifesLabel extends GameComponent {
+import ar.edu.unq.hollowars.levels.Level;
+
+public class LifesLabel extends GameComponent<Level> {
 
 	private int value = 0;
 	
@@ -27,7 +29,7 @@ public class LifesLabel extends GameComponent {
 		return value;
 	}
 
-	public void setPoints(int value) {
+	public void setValue(int value) {
 		this.value = value;
 	}
 	

@@ -15,6 +15,12 @@ public class HolloWarsGame extends Game{
 	
 	@Override
 	protected void initializeResources() {
+		this.initializeEnemies();
+		
+	}
+
+	private void initializeEnemies() {
+		// TODO Auto-generated method stub
 		
 	}
 
