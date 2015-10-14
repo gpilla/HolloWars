@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.uqbar.vainilla.GameScene;
 
+import ar.edu.unq.hollowars.GameOverScene;
 import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
 import ar.edu.unq.hollowars.components.ui.LifesLabel;
@@ -50,7 +51,7 @@ public abstract class HolloWarsLevel extends GameScene {
 		try {
 			waves = new ReadCSV("src/main/resources/config/levels/"+this.getClass().getSimpleName()+".csv").run();
 		} catch (Exception e) {
-			System.out.println("me rompo");
+			System.out.println("No se encontro el archivo de configuración");
 		}	
 		for (String[] linea : waves) {
 			for (int i = 0; i < Integer.parseInt(linea[2]);  i++) {
@@ -73,7 +74,7 @@ public abstract class HolloWarsLevel extends GameScene {
 					e.printStackTrace();
 				}
 					
-					this.addEnemy(enemy);
+				this.addEnemy(enemy);
 
 			}
 		}
@@ -127,6 +128,18 @@ public abstract class HolloWarsLevel extends GameScene {
 
 	public void setLifes(int lifes) {
 		this.lifes = lifes;
+		this.lifesLabel.setValue(this.lifes);
+	}
+
+	public void playerShipDestroyed(PlayerShip playerShip) {
+		this.setLifes(this.getLifes() - 1);
+	}
+	
+	public void gameOver()
+	{
+		this.removeComponent(this.getPlayerShip());
+		this.removeComponents(this.getEnemyShips());
+	//	this.getGame().setCurrentScene(new GameOverScene());
 	}
 	
 }
