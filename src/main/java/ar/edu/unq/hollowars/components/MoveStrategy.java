@@ -37,7 +37,8 @@ public abstract class MoveStrategy {
 		this.ship.move(this.i * advanced, this.j * advanced);
 		
 		if (this.ship.getY() > this.ship.getGame().getDisplayHeight()) {
-			this.ship.getScene().enemyShipDestroyed(this.ship);
+			this.ship.getScene().getEnemyShips().remove(this.ship);
+			this.ship.destroy();
 		}
 		this.variante(deltaState);
 	}
