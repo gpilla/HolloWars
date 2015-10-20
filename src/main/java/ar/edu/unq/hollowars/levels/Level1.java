@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import com.uqbar.vainilla.GameScene;
 
 import ar.edu.unq.hollowars.components.EnemyShip;
+import ar.edu.unq.hollowars.components.EnemyShipHorde;
 import ar.edu.unq.hollowars.components.PlayerShip;
+import ar.edu.unq.hollowars.components.strategies.MoveStrategy;
 import ar.edu.unq.hollowars.components.ui.LifesLabel;
 import ar.edu.unq.hollowars.components.ui.PointsLabel;
 import ar.edu.unq.hollowars.parser.ReadCSV;
@@ -16,6 +18,7 @@ public class Level1 extends GameScene {
 	private PlayerShip playerShip;
 	private LifesLabel lifesLabel;
 	private PointsLabel pointsLabel;
+	private MoveStrategy startegy;
 	
 	public Level1() {
 		this.setEnemies(new ArrayList<EnemyShip>());
@@ -45,12 +48,22 @@ public class Level1 extends GameScene {
 			System.out.println("me rompo");
 		}	
 		for (String[] linea : waves) {
-			for (int i = 0; i < Integer.parseInt(linea[2]);  i++) {
+			String deltatime = linea[0];;
+			String tipo = linea[1];
+			String cantidad = linea[2];
+			String x = linea[3];
+			String y = linea[4];
+			String strategyName = linea[5];
+
+			for (int i = 0; i < Integer.parseInt(cantidad);  i++) {
+//				for (int i = 0; i < 2;  i++) {
 				try {
-					enemy = ((EnemyShip) Class.forName("ar.edu.unq.hollowars.components."+linea[1]).newInstance())
-							.setStartingX(Integer.parseInt(linea[3]))
-							.setStartingY(Integer.parseInt(linea[4]))
-							.setSpawnTime(Integer.parseInt(linea[0]));
+					startegy = (MoveStrategy) Class.forName("ar.edu.unq.hollowars.components.strategies.Move"+strategyName+"Strategy").newInstance(); 
+					enemy = ((EnemyShip) Class.forName("ar.edu.unq.hollowars.components."+tipo).newInstance())
+							.setStartingX(Integer.parseInt(x))
+							.setStartingY(Integer.parseInt(y))
+							.setSpawnTime(Integer.parseInt(deltatime))
+							.setMoveStrategy(startegy);
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -69,6 +82,11 @@ public class Level1 extends GameScene {
 
 			}
 		}
+		EnemyShipHorde x = new EnemyShipHorde();
+		x.setSpawningPauseTime(0.3);
+		x.setNaves(this.getEnemyShips());
+		x.spawnShips();
+		
 	}
 	
 	public ArrayList<EnemyShip> getEnemyShips() {
@@ -99,7 +117,7 @@ public class Level1 extends GameScene {
 	}
 
 	public void destroyEnemyShip(EnemyShip enemyShip) {
-		enemyShip.setY(0);;
+		enemyShip.destroy();
 	}
 	
 }
