@@ -1,19 +1,16 @@
 package ar.edu.unq.hollowars;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
 
 import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
 
+import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 import ar.edu.unq.hollowars.levels.Level1;
-import ar.edu.unq.hollowars.parser.ReadCSV;
-
 
 public class HolloWarsGame extends Game{
 
 	public static void main(String[] args) {
-				
 		new DesktopGameLauncher(new HolloWarsGame()).launch();
 	}
 	
@@ -30,7 +27,7 @@ public class HolloWarsGame extends Game{
 
 	@Override
 	protected void setUpScenes() {
-		Level1 scene = new Level1();
+		HolloWarsLevel scene = new Level1();
 		this.setCurrentScene(scene);
 	}
 

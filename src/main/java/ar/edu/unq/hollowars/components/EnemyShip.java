@@ -8,9 +8,9 @@ import com.uqbar.vainilla.appearances.Rectangle;
 
 import ar.edu.unq.hollowars.components.strategies.MoveStrategy;
 import ar.edu.unq.hollowars.components.strategies.MoveZigZagStrategy;
-import ar.edu.unq.hollowars.levels.Level1;
+import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
-public class EnemyShip extends GameComponent<Level1> {
+public class EnemyShip extends GameComponent<HolloWarsLevel> {
 
 	private int height = 20;
 	private int width = 20;

@@ -9,23 +9,30 @@ import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.colissions.CollisionDetector;
 import com.uqbar.vainilla.events.constants.Key;
 
-import ar.edu.unq.hollowars.levels.Level1;
+import ar.edu.unq.hollowars.components.ships.guns.Gun;
+import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
-public class PlayerShip extends GameComponent<Level1> {
+public class PlayerShip extends GameComponent<HolloWarsLevel> {
 	
 	public static final int SPEED = 300;
 	public static final int NAVE_HEIGHT = 50;
 	public static final int NAVE_WIDTH = 30;
 	
+	private Gun gun;
+	
 	public PlayerShip() {
 		this.setAppearance(new Rectangle(Color.BLUE, NAVE_WIDTH, NAVE_HEIGHT));
+		this.setGun(new Gun());
+		this.getGun().setX(this.getCenterX());
+		this.getGun().setY(this.getY());
 	}
 	
 	@Override
 	public void onSceneActivated() {
 		this.alignVerticalCenterTo(this.getGame().getDisplayHeight() - 100);
 		this.alignHorizontalCenterTo(this.getGame().getDisplayWidth()/2);
-
+		
+		
 		super.onSceneActivated();
 	}
 	
@@ -49,14 +56,20 @@ public class PlayerShip extends GameComponent<Level1> {
 		if(deltaState.isKeyBeingHold(Key.DOWN)) {
 			this.down(deltaState.getDelta());
 		}
+		if(deltaState.isKeyBeingHold(Key.CTRL)) {
+			this.shoot(deltaState.getDelta());
+		}
 	}
 	
+	private void shoot(double delta) {
+		this.getGun().shoot(delta);
+	}
+
 	private void checkColitions(DeltaState deltaState) {
-		ArrayList<EnemyShip> enemies = this.getScene().getEnemyShips();
+		ArrayList<EnemyShip> enemies = new ArrayList<EnemyShip>( this.getScene().getEnemyShips() );
 		for (EnemyShip enemy : enemies) {
 			if ( this.checkColitionWithEnemy(enemy) ) {
-				System.out.println("Coliciono!");
-				enemy.destroy();
+				this.getScene().enemyShipDestroyed(enemy);
 			}
 		}
 	}
@@ -106,6 +119,22 @@ public class PlayerShip extends GameComponent<Level1> {
 	
 	private int getHeight() {
 		return (int) this.getAppearance().getHeight();
+	}
+
+	public Gun getGun() {
+		return gun;
+	}
+
+	public void setGun(Gun gun) {
+		this.gun = gun;
+	}
+	
+	public double getCenterX() {
+		return this.getX() + this.getWidth() / 2;
+	}
+	
+	public double getCenterY() {
+		return this.getY() + this.getHeight() / 2;
 	}
 	
 }
