@@ -13,20 +13,20 @@ import ar.edu.unq.hollowars.parser.ReadCSV;
 
 public class Level1 extends HolloWarsLevel {
 	
-	private ArrayList<EnemyShip> enemyShips;
+	private ArrayList<EnemyShip> enemyShips = new ArrayList<EnemyShip>();
 	private PlayerShip playerShip;
 	private LifesLabel lifesLabel;
 	private PointsLabel pointsLabel;
 	private MoveStrategy startegy;
 	
 	public Level1() {
-		this.setEnemies(new ArrayList<EnemyShip>());
-		
-		this.addComponent(new PlayerShip());
-		
-		generateEnemies();
-		
-		generateUI();
+//		this.setEnemies(new ArrayList<EnemyShip>());
+//		
+////		this.addComponent(new PlayerShip());
+//		
+//		generateEnemies();
+//		
+//		generateUI();
 	}
 
 	private void generateUI() {
