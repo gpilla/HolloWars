@@ -22,7 +22,25 @@ public class LifesLabel extends GameComponent<HolloWarsLevel> {
 	@Override
 	public void update(DeltaState deltaState) {
 		this.setAppearance(new Label(new Font(Font.SANS_SERIF, Font.BOLD, 20) , Color.YELLOW, String.valueOf(value)));
+		this.checkWinCondition();
+		//if ( this.checkLooseCondition() ) {
+			//this.getScene().gameOver();
+		//}
 		super.update(deltaState);
+	}
+
+	private boolean checkWinCondition() {
+		if (this.getValue() > 100) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean checkLooseCondition() {
+		if (this.getValue() <= 0) {
+			return true;
+		}
+		return false;
 	}
 
 	public int getValue() {

@@ -7,6 +7,8 @@ import com.uqbar.vainilla.GameScene;
 import ar.edu.unq.hollowars.GameOverScene;
 import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
+import ar.edu.unq.hollowars.components.ships.guns.Gun;
+import ar.edu.unq.hollowars.components.ui.Background;
 import ar.edu.unq.hollowars.components.ui.LifesLabel;
 import ar.edu.unq.hollowars.components.ui.PointsLabel;
 import ar.edu.unq.hollowars.parser.ReadCSV;
@@ -23,21 +25,27 @@ public abstract class HolloWarsLevel extends GameScene {
 	@Override
 	public void onSetAsCurrent() {
 		enemyShips = new ArrayList<EnemyShip>();
-		super.onSetAsCurrent();
 		this.generateUI();
 		
 		this.setPoints(0);
 		this.setLifes(3);
 		
 		generatePlayer();
-		generateEnemies();	
+		generateEnemies();
+		
+		super.onSetAsCurrent();
 	}
 
 	private void generatePlayer() {
-		this.addComponent(new PlayerShip());
+		this.setPlayerShip(new PlayerShip());
+		this.addComponent(this.getPlayerShip());
+		Gun gun = new Gun(this.getPlayerShip());
+		this.addComponent(gun);
+		this.getPlayerShip().setGun(gun);
 	}
 
 	private void generateUI() {
+		this.addComponent(new Background());
 		lifesLabel = new LifesLabel(10, 10);
 		this.addComponent(lifesLabel);
 		pointsLabel = new PointsLabel(600, 10);

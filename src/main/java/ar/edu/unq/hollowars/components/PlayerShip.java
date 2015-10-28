@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Rectangle;
+import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.colissions.CollisionDetector;
 import com.uqbar.vainilla.events.constants.Key;
 
@@ -22,16 +23,15 @@ public class PlayerShip extends GameComponent<HolloWarsLevel> {
 	
 	public PlayerShip() {
 		this.setAppearance(new Rectangle(Color.BLUE, NAVE_WIDTH, NAVE_HEIGHT));
-		this.setGun(new Gun());
-		this.getGun().setX(this.getCenterX());
-		this.getGun().setY(this.getY());
+		this.setAppearance(Sprite.fromImage("images/1942Sheet1.png").crop(34, 10, 23, 16).scaleTo(50, 50));
+		this.setX(100);
+		this.setY(100);
 	}
 	
 	@Override
 	public void onSceneActivated() {
 		this.alignVerticalCenterTo(this.getGame().getDisplayHeight() - 100);
 		this.alignHorizontalCenterTo(this.getGame().getDisplayWidth()/2);
-		
 		
 		super.onSceneActivated();
 	}
@@ -70,6 +70,7 @@ public class PlayerShip extends GameComponent<HolloWarsLevel> {
 		for (EnemyShip enemy : enemies) {
 			if ( this.checkColitionWithEnemy(enemy) ) {
 				this.getScene().enemyShipDestroyed(enemy);
+				this.getScene().playerShipDestroyed(this);
 			}
 		}
 	}
