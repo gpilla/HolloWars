@@ -1,6 +1,8 @@
-package ar.edu.unq.hollowars.components;
+package ar.edu.unq.hollowars.components.strategies;
 
 import com.uqbar.vainilla.DeltaState;
+
+import ar.edu.unq.hollowars.components.EnemyShip;
 
 public abstract class MoveStrategy {
 	
@@ -42,7 +44,8 @@ public abstract class MoveStrategy {
 		}
 		this.variante(deltaState);
 	}
-	private void variante(DeltaState deltaState) {
+	
+	protected void variante(DeltaState deltaState) {
 		// TODO Auto-generated method stub
 		
 	}

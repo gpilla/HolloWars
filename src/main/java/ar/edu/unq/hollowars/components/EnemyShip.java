@@ -6,6 +6,8 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Rectangle;
 
+import ar.edu.unq.hollowars.components.strategies.MoveStrategy;
+import ar.edu.unq.hollowars.components.strategies.MoveZigZagStrategy;
 import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
 public class EnemyShip extends GameComponent<HolloWarsLevel> {
@@ -78,6 +80,12 @@ public class EnemyShip extends GameComponent<HolloWarsLevel> {
 
 	public EnemyShip setSpawnTime(double spawnTime) {
 		this.spawnTime = spawnTime;
+		return this;
+	}
+
+	public EnemyShip setMoveStrategy(MoveStrategy startegy) {
+		this.estategiaDeMovimiento = startegy;
+		this.estategiaDeMovimiento.setNave(this);
 		return this;
 	}
 

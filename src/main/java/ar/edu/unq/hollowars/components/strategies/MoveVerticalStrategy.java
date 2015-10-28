@@ -1,4 +1,4 @@
-package ar.edu.unq.hollowars.components;
+package ar.edu.unq.hollowars.components.strategies;
 
 
 public class MoveVerticalStrategy extends MoveStrategy {

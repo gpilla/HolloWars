@@ -32,6 +32,7 @@ public class ReadCSV {
 	try {
 
 		br = new BufferedReader(new FileReader(this.csvFile));
+		//salto la linea de encabezados
 		br.readLine();
 		while ((line = br.readLine()) != null) {
 
