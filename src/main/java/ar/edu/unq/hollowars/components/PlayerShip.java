@@ -8,6 +8,7 @@ import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.colissions.CollisionDetector;
 import com.uqbar.vainilla.events.constants.Key;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 import ar.edu.unq.hollowars.components.ships.guns.Gun;
 import ar.edu.unq.hollowars.levels.HolloWarsLevel;
@@ -25,6 +26,7 @@ public class PlayerShip extends GameComponent<HolloWarsLevel> {
 		this.setGun(new Gun());
 		this.getGun().setX(this.getCenterX());
 		this.getGun().setY(this.getY());
+		new SoundBuilder().buildSound("/sounds/stage_clear.wav").play(1);
 	}
 	
 	@Override

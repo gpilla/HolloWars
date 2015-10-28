@@ -29,64 +29,64 @@ public class Level1 extends HolloWarsLevel {
 //		generateUI();
 	}
 
-	private void generateUI() {
-		lifesLabel = new LifesLabel(10, 10);
-		this.addComponent(lifesLabel);
-		pointsLabel = new PointsLabel(600, 10);
-		this.addComponent(pointsLabel);
-	}
+//	private void generateUI() {
+//		lifesLabel = new LifesLabel(10, 10);
+//		this.addComponent(lifesLabel);
+//		pointsLabel = new PointsLabel(600, 10);
+//		this.addComponent(pointsLabel);
+//	}
 
-	private void generateEnemies() {
-		
-		ArrayList<String[]> waves = null;
-		EnemyShip enemy = null;
-		
-		try {
-			waves = new ReadCSV("lvlConfigs/"+this.getClass().getSimpleName()+".csv").run();
-		} catch (Exception e) {
-			System.out.println("me rompo");
-		}	
-		for (String[] linea : waves) {
-			String deltatime = linea[0];;
-			String tipo = linea[1];
-			String cantidad = linea[2];
-			String x = linea[3];
-			String y = linea[4];
-			String strategyName = linea[5];
-
-			for (int i = 0; i < Integer.parseInt(cantidad);  i++) {
-//				for (int i = 0; i < 2;  i++) {
-				try {
-					startegy = (MoveStrategy) Class.forName("ar.edu.unq.hollowars.components.strategies.Move"+strategyName+"Strategy").newInstance(); 
-					enemy = ((EnemyShip) Class.forName("ar.edu.unq.hollowars.components."+tipo).newInstance())
-							.setStartingX(Integer.parseInt(x))
-							.setStartingY(Integer.parseInt(y))
-							.setSpawnTime(Integer.parseInt(deltatime))
-							.setMoveStrategy(startegy);
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-					
-					this.addEnemy(enemy);
-
-			}
-		}
-		EnemyShipHorde x = new EnemyShipHorde();
-		x.setSpawningPauseTime(0.3);
-		x.setNaves(this.getEnemyShips());
-		x.spawnShips();
-		
-	}
+//	private void generateEnemies() {
+//		
+//		ArrayList<String[]> waves = null;
+//		EnemyShip enemy = null;
+//		
+//		try {
+//			waves = new ReadCSV("lvlConfigs/"+this.getClass().getSimpleName()+".csv").run();
+//		} catch (Exception e) {
+//			System.out.println("me rompo");
+//		}	
+//		for (String[] linea : waves) {
+//			String deltatime = linea[0];;
+//			String tipo = linea[1];
+//			String cantidad = linea[2];
+//			String x = linea[3];
+//			String y = linea[4];
+//			String strategyName = linea[5];
+//
+//			for (int i = 0; i < Integer.parseInt(cantidad);  i++) {
+////				for (int i = 0; i < 2;  i++) {
+//				try {
+//					startegy = (MoveStrategy) Class.forName("ar.edu.unq.hollowars.components.strategies.Move"+strategyName+"Strategy").newInstance(); 
+//					enemy = ((EnemyShip) Class.forName("ar.edu.unq.hollowars.components."+tipo).newInstance())
+//							.setStartingX(Integer.parseInt(x))
+//							.setStartingY(Integer.parseInt(y))
+//							.setSpawnTime(Integer.parseInt(deltatime))
+//							.setMoveStrategy(startegy);
+//				} catch (NumberFormatException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (InstantiationException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IllegalAccessException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (ClassNotFoundException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//					
+//					this.addEnemy(enemy);
+//
+//			}
+//		}
+//		EnemyShipHorde x = new EnemyShipHorde();
+//		x.setSpawningPauseTime(0.3);
+//		x.setNaves(this.getEnemyShips());
+//		x.spawnShips();
+//		
+//	}
 	
 	public ArrayList<EnemyShip> getEnemyShips() {
 		return enemyShips;
