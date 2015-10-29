@@ -8,35 +8,41 @@ public abstract class MoveStrategy {
 	
 	protected EnemyShip ship;
 	
-	protected double speed = 0;
-	protected double maxSpeed = 500;
-	protected double acceleration = 1.5;
-	protected double i,j;
-	
-	public EnemyShip getNave() {
+	public EnemyShip getShip() {
 		return ship;
 	}
-	public void setNave(EnemyShip nave) {
+	
+	public void setShip(EnemyShip nave) {
 		this.ship = nave;
+		this.setShipConfig();
 	}
+	
+	protected abstract void setShipConfig();
+
 	public double getI() {
-		return i;
+		return this.getShip().getI();
 	}
 	public void setI(double i) {
-		this.i = i;
+		this.getShip().setI(i);
 	}
+	
+	protected void inverseI() {
+		this.setI(this.getI()*-1);
+	}
+	
 	public double getJ() {
-		return j;
+		return this.getShip().getJ();
 	}
 	public void setJ(double j) {
-		this.j = j;
+		this.getShip().setJ(j);
 	}
 	
 	public void update(DeltaState deltaState) {
-		this.speed += this.acceleration + deltaState.getDelta();
-		double advanced = Math.min(this.maxSpeed, this.speed) * deltaState.getDelta();
+		double speed = this.getShip().getSpeed() + this.getShip().getAcceleration() / deltaState.getDelta();
+		double advanced = Math.min(this.getShip().getMaxSpeed(), speed) * deltaState.getDelta();
+		this.getShip().setSpeed(speed);
 		
-		this.ship.move(this.i * advanced, this.j * advanced);
+		this.ship.move(this.getI() * advanced, this.getJ() * advanced);
 		
 		if (this.ship.getY() > this.ship.getGame().getDisplayHeight()) {
 			this.ship.getScene().getEnemyShips().remove(this.ship);

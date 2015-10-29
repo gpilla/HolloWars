@@ -71,12 +71,12 @@ public abstract class HolloWarsLevel extends GameScene {
 		for (String[] linea : waves) {
 			for (int i = 0; i < Integer.parseInt(linea[2]);  i++) {
 				try {
+					MoveStrategy strat = (MoveStrategy) Class.forName("ar.edu.unq.hollowars.components.strategies.Move"+linea[5]+"Strategy").newInstance();
 					enemy = ((EnemyShip) Class.forName("ar.edu.unq.hollowars.components."+linea[1]).newInstance())
 							.setStartingX(Integer.parseInt(linea[3]))
 							.setStartingY(Integer.parseInt(linea[4]))
 							.setSpawnTime(Integer.parseInt(linea[0]))
-							.setMoveStrategy(new MoveVerticalStrategy())
-							.setMoveStrategy((MoveStrategy) Class.forName("ar.edu.unq.hollowars.components.strategies.Move"+linea[5]+"Strategy").newInstance());;
+							.setMoveStrategy(strat);
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

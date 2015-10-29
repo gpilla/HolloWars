@@ -15,10 +15,11 @@ public class EnemyShip extends GameComponent<HolloWarsLevel> {
 
 	private int height = 50;
 	private int width = 30;
-//	private double speed = 0;
-//	private double maxSpeed = 500;
-//	private double acceleration = 1.5;
-	private double i, j;
+	private double speed = 0;
+	private double maxSpeed = 500;
+	private double acceleration = 1.5;
+	private double i,j;
+	
 	private double spawnTime;
 	private MoveStrategy estategiaDeMovimiento = new MoveZigZagStrategy() ;
 
@@ -29,7 +30,7 @@ public class EnemyShip extends GameComponent<HolloWarsLevel> {
 		this.setY(0);
 		this.setSpawnTime(spawnTime);
 		
-		this.estategiaDeMovimiento.setNave(this);
+		this.estategiaDeMovimiento.setShip(this);
 	}
 
 	@Override
@@ -87,8 +88,48 @@ public class EnemyShip extends GameComponent<HolloWarsLevel> {
 
 	public EnemyShip setMoveStrategy(MoveStrategy startegy) {
 		this.estategiaDeMovimiento = startegy;
-		this.estategiaDeMovimiento.setNave(this);
+		this.estategiaDeMovimiento.setShip(this);
 		return this;
+	}
+
+	public double getI() {
+		return i;
+	}
+
+	public void setI(double i) {
+		this.i = i;
+	}
+
+	public double getJ() {
+		return j;
+	}
+
+	public void setJ(double j) {
+		this.j = j;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
+	public double getMaxSpeed() {
+		return maxSpeed;
+	}
+
+	public void setMaxSpeed(double maxSpeed) {
+		this.maxSpeed = maxSpeed;
+	}
+
+	public double getAcceleration() {
+		return acceleration;
+	}
+
+	public void setAcceleration(double acceleration) {
+		this.acceleration = acceleration;
 	}
 
 }

@@ -4,13 +4,7 @@ import com.uqbar.vainilla.DeltaState;
 
 public class MoveZigZagStrategy extends MoveStrategy {
 		
-		public MoveZigZagStrategy(){
-			this.i = 1;
-			this.j = 1;
-			this.speed = 0;
-			this.maxSpeed = 500;
-			this.acceleration = 1.5;
-		}	
+	
 		
 		
 		protected void variante(DeltaState deltaState){
@@ -21,8 +15,18 @@ public class MoveZigZagStrategy extends MoveStrategy {
 				System.out.println(t);		
 			}
 			
-			if(t%8 ==0){
-				this.i = this.i*-1;
+			if(t%8 >=0){
+				inverseI();
 			}
 		}
+
+		@Override
+		protected void setShipConfig() {
+			this.getShip().setI(1);
+			this.getShip().setJ(1);
+			this.getShip().setSpeed(0);
+			this.getShip().setMaxSpeed(50);
+			this.getShip().setAcceleration(1.5);
+		}
+
 }
