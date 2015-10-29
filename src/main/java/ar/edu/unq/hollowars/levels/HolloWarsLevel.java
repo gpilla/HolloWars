@@ -8,7 +8,9 @@ import ar.edu.unq.hollowars.GameOverScene;
 import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
 import ar.edu.unq.hollowars.components.ships.guns.Gun;
+import ar.edu.unq.hollowars.components.strategies.MoveVerticalStrategy;
 import ar.edu.unq.hollowars.components.ui.Background;
+import ar.edu.unq.hollowars.components.ui.Cloud;
 import ar.edu.unq.hollowars.components.ui.LifesLabel;
 import ar.edu.unq.hollowars.components.ui.PointsLabel;
 import ar.edu.unq.hollowars.parser.ReadCSV;
@@ -46,10 +48,14 @@ public abstract class HolloWarsLevel extends GameScene {
 
 	private void generateUI() {
 		this.addComponent(new Background());
+		this.addComponent(new Cloud());
+		this.addComponent(new Cloud());
+		this.addComponent(new Cloud());
 		lifesLabel = new LifesLabel(10, 10);
 		this.addComponent(lifesLabel);
 		pointsLabel = new PointsLabel(600, 10);
 		this.addComponent(pointsLabel);
+		
 	}
 
 	private void generateEnemies() {
@@ -67,7 +73,8 @@ public abstract class HolloWarsLevel extends GameScene {
 					enemy = ((EnemyShip) Class.forName("ar.edu.unq.hollowars.components."+linea[1]).newInstance())
 							.setStartingX(Integer.parseInt(linea[3]))
 							.setStartingY(Integer.parseInt(linea[4]))
-							.setSpawnTime(Integer.parseInt(linea[0]));
+							.setSpawnTime(Integer.parseInt(linea[0]))
+							.setMoveStrategy(new MoveVerticalStrategy());
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

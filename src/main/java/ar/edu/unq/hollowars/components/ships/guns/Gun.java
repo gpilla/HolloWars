@@ -8,7 +8,7 @@ import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
 public class Gun extends GameComponent<HolloWarsLevel> {
 
-	public static final double COLD_DOWN_TIME = 0.1;
+	public static final double COLD_DOWN_TIME = 0.3;
 	private double coldDown = 0;
 	
 	private PlayerShip ship;

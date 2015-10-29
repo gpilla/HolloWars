@@ -34,7 +34,7 @@ public class Background extends GameComponent<HolloWarsLevel> {
 				
 			));
 		
-//		this.setAppearance(new Animation(0.1, 
+//		this.setAppearance(new Animation(0.05, 
 //				Sprite.fromImage("images/broken_tv/frame-1.gif").repeatHorizontallyToCover(this.getGame().getDisplayWidth()).repeatVerticallyToCover(this.getGame().getDisplayHeight()),
 //				Sprite.fromImage("images/broken_tv/frame-2.gif").repeatHorizontallyToCover(this.getGame().getDisplayWidth()).repeatVerticallyToCover(this.getGame().getDisplayHeight()),
 //				Sprite.fromImage("images/broken_tv/frame-3.gif").repeatHorizontallyToCover(this.getGame().getDisplayWidth()).repeatVerticallyToCover(this.getGame().getDisplayHeight()),

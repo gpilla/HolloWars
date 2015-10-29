@@ -33,6 +33,11 @@ public class Bullet extends GameComponent<HolloWarsLevel> {
 		
 		this.move(this.getI() * advanced, this.getJ() * advanced);
 		this.checkColitions(deltaState);
+		
+		if (this.getY() < 0) {
+			this.destroy();
+		}
+		
 		super.update(deltaState);
 	}
 

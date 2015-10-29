@@ -11,6 +11,7 @@ import com.uqbar.vainilla.colissions.CollisionDetector;
 import com.uqbar.vainilla.events.constants.Key;
 import com.uqbar.vainilla.sound.SoundBuilder;
 
+import ar.edu.unq.hollowars.components.animations.ExplotionAnimation;
 import ar.edu.unq.hollowars.components.ships.guns.Gun;
 import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
@@ -26,9 +27,10 @@ public class PlayerShip extends GameComponent<HolloWarsLevel> {
 		this.setAppearance(new Rectangle(Color.BLUE, NAVE_WIDTH, NAVE_HEIGHT));
 
 		this.setAppearance(Sprite.fromImage("images/1942Sheet1.png").crop(34, 10, 23, 16).scaleTo(50, 50));
+		//this.setAppearance(new ExplotionAnimation());
 		this.setX(100);
 		this.setY(100);
-		new SoundBuilder().buildSound("/sounds/stage_clear.wav").play(1);
+		//new SoundBuilder().buildSound("/sounds/stage_clear.wav").play(1);
 
 	}
 	

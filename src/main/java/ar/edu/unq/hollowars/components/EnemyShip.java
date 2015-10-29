@@ -5,6 +5,7 @@ import java.awt.Color;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Rectangle;
+import com.uqbar.vainilla.appearances.Sprite;
 
 import ar.edu.unq.hollowars.components.strategies.MoveStrategy;
 import ar.edu.unq.hollowars.components.strategies.MoveZigZagStrategy;
@@ -12,8 +13,8 @@ import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
 public class EnemyShip extends GameComponent<HolloWarsLevel> {
 
-	private int height = 20;
-	private int width = 20;
+	private int height = 50;
+	private int width = 30;
 //	private double speed = 0;
 //	private double maxSpeed = 500;
 //	private double acceleration = 1.5;
@@ -23,6 +24,7 @@ public class EnemyShip extends GameComponent<HolloWarsLevel> {
 
 	public EnemyShip() {
 		this.setAppearance(new Rectangle(Color.RED, width, height));
+		this.setAppearance(Sprite.fromImage("images/1942Sheet1.png").crop(92, 374, 12, 25).scaleTo(width, height));
 		this.setX(0);
 		this.setY(0);
 		this.setSpawnTime(spawnTime);
