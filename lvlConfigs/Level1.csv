@@ -1,3 +1,0 @@
-deltatime,Tipo,Cantidad,x,y,strategy
-1,EnemyShip,5,20,0,Vertical
-10,EnemyShip,5,300,0,ZigZag
