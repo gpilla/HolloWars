@@ -8,6 +8,7 @@ import ar.edu.unq.hollowars.GameOverScene;
 import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
 import ar.edu.unq.hollowars.components.ships.guns.Gun;
+import ar.edu.unq.hollowars.components.strategies.MoveStrategy;
 import ar.edu.unq.hollowars.components.strategies.MoveVerticalStrategy;
 import ar.edu.unq.hollowars.components.ui.Background;
 import ar.edu.unq.hollowars.components.ui.Cloud;
@@ -77,7 +78,8 @@ public abstract class HolloWarsLevel extends GameScene {
 							.setStartingX(Integer.parseInt(linea[3]))
 							.setStartingY(Integer.parseInt(linea[4]))
 							.setSpawnTime(Integer.parseInt(linea[0]))
-							.setMoveStrategy(new MoveVerticalStrategy());
+							.setMoveStrategy(new MoveVerticalStrategy())
+							.setMoveStrategy((MoveStrategy) Class.forName("ar.edu.unq.hollowars.components.strategies.Move"+linea[5]+"Strategy").newInstance());;
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
