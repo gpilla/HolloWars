@@ -1,6 +1,6 @@
 deltatime,Tipo,Cantidad,x,y,strategy
-0,EnemyShip,1,10,-100,ZigZag
-1,EnemyShip,1,100,-100,ZigZag
+0,EnemyShip,1,400,100,Galaxian
+0,EnemyShip,1,100,100,Galaxian
 2,EnemyShip,1,200,-100,ZigZag
 3,EnemyShip,1,300,-100,ZigZag
 4,EnemyShip,1,400,-100,ZigZag

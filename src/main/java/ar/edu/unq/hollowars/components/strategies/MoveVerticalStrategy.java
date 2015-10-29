@@ -2,12 +2,14 @@ package ar.edu.unq.hollowars.components.strategies;
 
 
 public class MoveVerticalStrategy extends MoveStrategy {
+
+	@Override
+	protected void setShipConfig() {
+		this.getShip().setI(0);
+		this.getShip().setJ(1);
+		this.getShip().setSpeed(0);
+		this.getShip().setMaxSpeed(500);
+		this.getShip().setAcceleration(1.5);
+	}
 		
-		public MoveVerticalStrategy(){
-			this.i = 0;
-			this.j = 1;
-			this.speed = 0;
-			this.maxSpeed = 500;
-			this.acceleration = 1.5;
-		}	
 }
