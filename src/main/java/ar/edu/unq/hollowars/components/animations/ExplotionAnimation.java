@@ -1,12 +1,20 @@
 package ar.edu.unq.hollowars.components.animations;
 
-import com.uqbar.vainilla.appearances.Animation;
 import com.uqbar.vainilla.appearances.Sprite;
 
 public class ExplotionAnimation extends Animation {
 	
-	public ExplotionAnimation() {
-		super(0.05, generateSprites());
+	static ExplotionAnimation instance = null;
+	
+	public static ExplotionAnimation getInstance() {
+		if (instance == null) {
+			instance = new ExplotionAnimation();
+		}
+		return instance;
+	}
+	
+	protected ExplotionAnimation() {
+		super(0.05, false, generateSprites());
 	}
 	
 	private static Sprite[] generateSprites() {
@@ -19,7 +27,7 @@ public class ExplotionAnimation extends Animation {
 	}
 
 	public ExplotionAnimation(double meantime, Sprite[] sprites) {
-		super(meantime, sprites);
+		super(meantime, false, sprites);
 	}
 
 }

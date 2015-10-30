@@ -7,11 +7,12 @@ import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.appearances.Sprite;
 
+import ar.edu.unq.hollowars.components.ships.guns.Gun;
 import ar.edu.unq.hollowars.components.strategies.MoveStrategy;
 import ar.edu.unq.hollowars.components.strategies.MoveZigZagStrategy;
 import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
-public class EnemyShip extends GameComponent<HolloWarsLevel> {
+public class EnemyShip extends Ship {
 
 	private int height = 50;
 	private int width = 30;
@@ -22,6 +23,8 @@ public class EnemyShip extends GameComponent<HolloWarsLevel> {
 	
 	private double spawnTime;
 	private MoveStrategy estategiaDeMovimiento = new MoveZigZagStrategy() ;
+	
+	private Gun gun;
 
 	public EnemyShip() {
 		this.setAppearance(new Rectangle(Color.RED, width, height));
@@ -39,6 +42,8 @@ public class EnemyShip extends GameComponent<HolloWarsLevel> {
 		if (checkSpawmColdDown(deltaState) ) {
 			this.estategiaDeMovimiento.update(deltaState);
 		}
+		
+		//this.getGun().shoot(deltaState.getDelta());
 		
 		super.update(deltaState);
 	}

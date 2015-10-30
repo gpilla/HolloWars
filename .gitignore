@@ -2,3 +2,4 @@ target/*
 .settings/*
 .project
 .classpath
+src/main/resources/config/levels/.~lock.Level1.csv#

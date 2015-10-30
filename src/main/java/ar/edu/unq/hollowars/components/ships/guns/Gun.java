@@ -4,6 +4,7 @@ import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 
 import ar.edu.unq.hollowars.components.PlayerShip;
+import ar.edu.unq.hollowars.components.Ship;
 import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
 public class Gun extends GameComponent<HolloWarsLevel> {
@@ -11,11 +12,8 @@ public class Gun extends GameComponent<HolloWarsLevel> {
 	public static final double COLD_DOWN_TIME = 0.3;
 	private double coldDown = 0;
 	
-	private PlayerShip ship;
-	
-	public Gun(PlayerShip ship) {
-		this.setShip(ship);
-	}
+	private Ship ship;
+
 	
 	public void shoot(double delta) {
 		if( this.coldDown(delta) ){
@@ -40,11 +38,11 @@ public class Gun extends GameComponent<HolloWarsLevel> {
 		super.update(deltaState);
 	}
 
-	public PlayerShip getShip() {
+	public Ship getShip() {
 		return ship;
 	}
 
-	public void setShip(PlayerShip ship) {
+	public void setShip(Ship ship) {
 		this.ship = ship;
 	}
 	

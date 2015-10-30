@@ -46,6 +46,7 @@ public class Bullet extends GameComponent<HolloWarsLevel> {
 		for (EnemyShip enemy : enemies) {
 			if ( this.checkColitionWithEnemy(enemy) ) {
 				this.getScene().enemyShipDestroyed(enemy);
+				this.destroy();
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import com.uqbar.vainilla.DesktopGameLauncher;
 import com.uqbar.vainilla.Game;
 
+import ar.edu.unq.hollowars.components.animations.ExplotionAnimation;
 import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 import ar.edu.unq.hollowars.levels.Level1;
 
@@ -16,14 +17,9 @@ public class HolloWarsGame extends Game{
 	
 	@Override
 	protected void initializeResources() {
-		this.initializeEnemies();
-		
+		ExplotionAnimation.getInstance();
 	}
 
-	private void initializeEnemies() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	protected void setUpScenes() {

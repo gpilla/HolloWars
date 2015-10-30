@@ -1,7 +1,5 @@
 package ar.edu.unq.hollowars.components.ui;
 
-import java.util.Random;
-
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.appearances.Animation;
@@ -44,7 +42,7 @@ public class Cloud extends GameComponent<HolloWarsLevel>{
 	}
 
 	private void resetCloud() {
-		this.alignBottomTo(0);
+		this.setY(0-this.getAppearance().getHeight());
 		this.setX(Math.random()*this.getGame().getDisplayWidth());
 		this.setSpeed(100+Math.random()*200);
 	}

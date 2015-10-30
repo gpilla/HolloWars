@@ -15,13 +15,11 @@ import ar.edu.unq.hollowars.components.animations.ExplotionAnimation;
 import ar.edu.unq.hollowars.components.ships.guns.Gun;
 import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
-public class PlayerShip extends GameComponent<HolloWarsLevel> {
+public class PlayerShip extends Ship {
 	
 	public static final int SPEED = 300;
 	public static final int NAVE_HEIGHT = 50;
 	public static final int NAVE_WIDTH = 30;
-	
-	private Gun gun;
 	
 	public PlayerShip() {
 		this.setAppearance(new Rectangle(Color.BLUE, NAVE_WIDTH, NAVE_HEIGHT));
@@ -99,49 +97,6 @@ public class PlayerShip extends GameComponent<HolloWarsLevel> {
 	
 	public void up(double delta) {
 		this.setY(Math.max(this.getTopLimit() , this.getY()- SPEED * delta));
-	}
-	
-	public double getLeftLimit()
-	{
-		return 0;
-	}
-	
-	private double getRightLimit() {
-		return this.getGame().getDisplayWidth() - this.getWidth();
-	}
-	
-	public double getTopLimit()
-	{
-		return 0;
-	}
-	
-	public double getBottomLimit()
-	{
-		return this.getGame().getDisplayHeight() - this.getHeight();
-	}
-
-	private int getWidth() {
-		return (int) this.getAppearance().getWidth();
-	}
-	
-	private int getHeight() {
-		return (int) this.getAppearance().getHeight();
-	}
-
-	public Gun getGun() {
-		return gun;
-	}
-
-	public void setGun(Gun gun) {
-		this.gun = gun;
-	}
-	
-	public double getCenterX() {
-		return this.getX() + this.getWidth() / 2;
-	}
-	
-	public double getCenterY() {
-		return this.getY() + this.getHeight() / 2;
 	}
 	
 }
