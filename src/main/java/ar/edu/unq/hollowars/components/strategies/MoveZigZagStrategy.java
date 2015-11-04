@@ -5,15 +5,8 @@ import com.uqbar.vainilla.DeltaState;
 public class MoveZigZagStrategy extends MoveStrategy {
 		
 	
-		
-		
 		protected void variante(DeltaState deltaState){
 			int t = (int) (deltaState.getDelta()*1000);
-			System.out.println(deltaState.getDelta()*1000);
-			
-			if(t>0){
-				System.out.println(t);		
-			}
 			
 			if(t%8 >=0){
 				inverseI();

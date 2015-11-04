@@ -6,7 +6,9 @@ import com.uqbar.vainilla.GameScene;
 
 import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
+import ar.edu.unq.hollowars.components.Ship;
 import ar.edu.unq.hollowars.components.ships.guns.Gun;
+import ar.edu.unq.hollowars.components.strategies.EnemyBulletStrategy;
 import ar.edu.unq.hollowars.components.strategies.MoveStrategy;
 import ar.edu.unq.hollowars.components.ui.Background;
 import ar.edu.unq.hollowars.components.ui.Cloud;
@@ -19,7 +21,7 @@ import ar.edu.unq.hollowars.parser.ReadCSV;
 
 public abstract class HolloWarsLevel extends GameScene {
 	
-	protected ArrayList<EnemyShip> enemyShips;
+	protected ArrayList<Ship> enemyShips;
 	protected PlayerShip playerShip;
 	protected int points;
 	protected int lifes;
@@ -28,7 +30,7 @@ public abstract class HolloWarsLevel extends GameScene {
 	
 	@Override
 	public void onSetAsCurrent() {
-		enemyShips = new ArrayList<EnemyShip>();
+		enemyShips = new ArrayList<Ship>();
 		this.generateBackground();
 		this.generateUI();
 		
@@ -68,7 +70,10 @@ public abstract class HolloWarsLevel extends GameScene {
 	private void generateEnemies() {
 		ArrayList<String[]> waves = null;
 		EnemyShip enemy = null;
-		
+		EnemyBulletStrategy bulletStrategy = new EnemyBulletStrategy();
+		ArrayList<Ship> enemies = new ArrayList<Ship>();
+		enemies.add(this.getPlayerShip());
+		bulletStrategy.setEnemyShips(enemies);
 		try {
 			waves = new ReadCSV("src/main/resources/config/levels/"+this.getClass().getSimpleName()+".csv").run();
 		} catch (Exception e) {
@@ -84,6 +89,8 @@ public abstract class HolloWarsLevel extends GameScene {
 							.setSpawnTime(Integer.parseInt(linea[0]))
 							.setMoveStrategy(strat);
 					Gun gun = new Gun();
+					
+					gun.setBulletStrategy(bulletStrategy);
 					this.addComponent(gun);
 					enemy.setGun(gun);
 				} catch (NumberFormatException e) {
@@ -106,11 +113,11 @@ public abstract class HolloWarsLevel extends GameScene {
 		}
 	}
 	
-	public ArrayList<EnemyShip> getEnemyShips() {
+	public ArrayList<Ship> getEnemyShips() {
 		return enemyShips;
 	}
 
-	public void setEnemies(ArrayList<EnemyShip> enemyShips) {
+	public void setEnemies(ArrayList<Ship> enemyShips) {
 		this.enemyShips = enemyShips;
 	}
 	
@@ -133,7 +140,7 @@ public abstract class HolloWarsLevel extends GameScene {
 		this.playerShip = playerShip;
 	}
 
-	public void enemyShipDestroyed(EnemyShip enemyShip) {
+	public void enemyShipDestroyed(Ship enemyShip) {
 		this.setPoints(this.getPoints() + 1);
 		this.getEnemyShips().remove(enemyShip);
 		this.addComponent(new Explotion(enemyShip));
@@ -160,6 +167,9 @@ public abstract class HolloWarsLevel extends GameScene {
 
 	public void playerShipDestroyed(PlayerShip playerShip) {
 		this.setLifes(this.getLifes() - 1);
+		if (this.getLifes() <= 0) {
+			System.out.println("GAME OVER");
+		}
 	}
 	
 	public void gameOver()

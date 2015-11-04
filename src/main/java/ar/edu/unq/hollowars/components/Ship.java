@@ -3,11 +3,13 @@ package ar.edu.unq.hollowars.components;
 import com.uqbar.vainilla.GameComponent;
 
 import ar.edu.unq.hollowars.components.ships.guns.Gun;
+import ar.edu.unq.hollowars.components.strategies.BulletStrategy;
 import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
 public abstract class Ship extends GameComponent<HolloWarsLevel> {
 
 	private Gun gun = null;
+	private BulletStrategy bulletStrategy;
 	
 	public Gun getGun() {
 		return gun;
@@ -19,6 +21,7 @@ public abstract class Ship extends GameComponent<HolloWarsLevel> {
 		}
 		this.gun = gun;
 		this.getGun().setShip(this);
+		this.getGun().setBulletStrategy(this.getBulletStrategy());
 	}
 	
 	public double getLeftLimit()
@@ -55,5 +58,15 @@ public abstract class Ship extends GameComponent<HolloWarsLevel> {
 	public double getCenterY() {
 		return this.getY() + this.getHeight() / 2;
 	}
+	
+	public BulletStrategy getBulletStrategy() {
+		return bulletStrategy;
+	}
+
+	public void setBulletStrategy(BulletStrategy bulletStrategy) {
+		this.bulletStrategy = bulletStrategy;
+	}
+
+	public abstract void hit();
 	
 }
