@@ -9,6 +9,7 @@ import com.uqbar.vainilla.appearances.Sprite;
 import com.uqbar.vainilla.colissions.CollisionDetector;
 import com.uqbar.vainilla.events.constants.Key;
 
+import ar.edu.unq.hollowars.components.ships.guns.Gun;
 import ar.edu.unq.hollowars.components.strategies.PlayerBulletStrategy;
 
 public class PlayerShip extends Ship {
@@ -98,8 +99,7 @@ public class PlayerShip extends Ship {
 
 	@Override
 	public void hit() {
-		// TODO Auto-generated method stub
-		
+		this.getScene().playerShipDestroyed(this);
 	}
 	
 }

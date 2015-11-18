@@ -21,7 +21,6 @@ public abstract class Ship extends GameComponent<HolloWarsLevel> {
 		}
 		this.gun = gun;
 		this.getGun().setShip(this);
-		this.getGun().setBulletStrategy(this.getBulletStrategy());
 	}
 	
 	public double getLeftLimit()

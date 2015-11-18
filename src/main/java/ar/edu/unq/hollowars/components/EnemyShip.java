@@ -1,6 +1,7 @@
 package ar.edu.unq.hollowars.components;
 
 import java.awt.Color;
+import java.util.Random;
 
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Rectangle;
@@ -38,7 +39,9 @@ public class EnemyShip extends Ship {
 			this.estategiaDeMovimiento.update(deltaState);
 		}
 		
-		//this.getGun().shoot(deltaState.getDelta());
+		if (Math.random()* 100 < 10) {
+			this.getGun().shoot(deltaState.getDelta());
+		}
 		
 		super.update(deltaState);
 	}

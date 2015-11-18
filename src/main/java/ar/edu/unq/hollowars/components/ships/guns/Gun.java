@@ -17,17 +17,17 @@ public class Gun extends GameComponent<HolloWarsLevel> {
 	
 	public void shoot(double delta) {
 		if( this.coldDown(delta) ){
-			Bullet  bullet = new Bullet(this.getX(), this.getY(), this.getBulletStrategy());
+			Bullet  bullet = new Bullet(this.getX(), this.getY(), this.getShip().getBulletStrategy());
 			this.getScene().addComponent(bullet);
 		}
 	}
 
 	private boolean coldDown(double delta) {
-		if ( this.coldDown <= 0 ) {
-			this.coldDown = COLD_DOWN_TIME;
+		if ( this.getColdDown() <= 0 ) {
+			this.setColdDown(COLD_DOWN_TIME);
 			return true;
 		}
-		this.coldDown -= delta;
+		this.setColdDown(this.getColdDown() - delta);
 		return false;
 	}
 	
@@ -52,6 +52,14 @@ public class Gun extends GameComponent<HolloWarsLevel> {
 
 	public void setBulletStrategy(BulletStrategy bulletStrategy) {
 		this.bulletStrategy = bulletStrategy;
+	}
+
+	public double getColdDown() {
+		return coldDown;
+	}
+
+	public void setColdDown(double coldDown) {
+		this.coldDown = coldDown;
 	}
 	
 }
