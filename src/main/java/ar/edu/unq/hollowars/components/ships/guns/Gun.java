@@ -17,6 +17,7 @@ public class Gun extends GameComponent<HolloWarsLevel> {
 	
 	public void shoot(double delta) {
 		if( this.coldDown(delta) ){
+this.getBulletStrategy().getSound().play(1);
 			Bullet  bullet = new Bullet(this.getX(), this.getY(), this.getBulletStrategy());
 			this.getScene().addComponent(bullet);
 		}
