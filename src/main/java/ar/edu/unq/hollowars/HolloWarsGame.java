@@ -10,6 +10,8 @@ import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 import ar.edu.unq.hollowars.levels.Level1;
 
 public class HolloWarsGame extends Game{
+	
+	private int currentLevel;
 
 	public static void main(String[] args) {
 		new DesktopGameLauncher(new HolloWarsGame()).launch();
@@ -36,6 +38,14 @@ public class HolloWarsGame extends Game{
 	public String getTitle() {
 		// TODO Auto-generated method stub
 		return "HolloWars";
+	}
+
+	public int getCurrentLevel() {
+		return currentLevel;
+	}
+
+	public void setCurrentLevel(int currentLevel) {
+		this.currentLevel = currentLevel;
 	}
 
 }

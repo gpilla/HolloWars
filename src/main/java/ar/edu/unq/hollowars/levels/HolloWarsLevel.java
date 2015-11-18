@@ -2,8 +2,10 @@ package ar.edu.unq.hollowars.levels;
 
 import java.util.ArrayList;
 
+import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
 
+import ar.edu.unq.hollowars.GameOverScene;
 import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
 import ar.edu.unq.hollowars.components.Ship;
@@ -70,10 +72,13 @@ public abstract class HolloWarsLevel extends GameScene {
 	private void generateEnemies() {
 		ArrayList<String[]> waves = null;
 		EnemyShip enemy = null;
-		EnemyBulletStrategy bulletStrategy = new EnemyBulletStrategy();
+		
+		
 		ArrayList<Ship> enemies = new ArrayList<Ship>();
 		enemies.add(this.getPlayerShip());
+		EnemyBulletStrategy bulletStrategy = new EnemyBulletStrategy();
 		bulletStrategy.setEnemyShips(enemies);
+		
 		try {
 			waves = new ReadCSV("src/main/resources/config/levels/"+this.getClass().getSimpleName()+".csv").run();
 		} catch (Exception e) {
@@ -88,11 +93,13 @@ public abstract class HolloWarsLevel extends GameScene {
 							.setStartingY(Integer.parseInt(linea[4]))
 							.setSpawnTime(Integer.parseInt(linea[0]))
 							.setMoveStrategy(strat);
-					Gun gun = new Gun();
 					
-					gun.setBulletStrategy(bulletStrategy);
+					enemy.setBulletStrategy(bulletStrategy);
+					
+					Gun gun = new Gun();
 					this.addComponent(gun);
 					enemy.setGun(gun);
+					
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -168,14 +175,16 @@ public abstract class HolloWarsLevel extends GameScene {
 	public void playerShipDestroyed(PlayerShip playerShip) {
 		this.setLifes(this.getLifes() - 1);
 		if (this.getLifes() <= 0) {
-			System.out.println("GAME OVER");
+			this.gameOver();
 		}
 	}
 	
 	public void gameOver()
 	{
-		this.removeComponent(this.getPlayerShip());
-		this.removeComponents(this.getEnemyShips());
+		for (GameComponent<?> component : this.getComponents()) {
+			component.destroy();
+		}
+		this.getGame().setCurrentScene(new GameOverScene());
 	}
 	
 }
