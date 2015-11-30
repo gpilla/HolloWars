@@ -6,6 +6,7 @@ import java.util.Random;
 import com.uqbar.vainilla.DeltaState;
 import com.uqbar.vainilla.appearances.Rectangle;
 import com.uqbar.vainilla.appearances.Sprite;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 import ar.edu.unq.hollowars.components.strategies.MoveStrategy;
 import ar.edu.unq.hollowars.components.strategies.MoveZigZagStrategy;
@@ -137,6 +138,7 @@ public class EnemyShip extends Ship {
 
 	public void hit() {
 		getScene().enemyShipDestroyed(this);
+		new SoundBuilder().buildSound("/sounds/bomb-02.wav").play(1);
 	}
 
 }
