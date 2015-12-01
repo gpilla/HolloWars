@@ -12,6 +12,7 @@ import ar.edu.unq.hollowars.components.BossEnemyShip;
 import ar.edu.unq.hollowars.components.BossEnemyShipTurret;
 import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
+import ar.edu.unq.hollowars.components.PowerUp;
 import ar.edu.unq.hollowars.components.Ship;
 import ar.edu.unq.hollowars.components.ships.guns.Gun;
 import ar.edu.unq.hollowars.components.strategies.EnemyBulletStrategy;
@@ -30,6 +31,7 @@ import ar.edu.unq.hollowars.parser.ReadCSV;
 public abstract class HolloWarsLevel extends GameScene {
 	
 	protected ArrayList<Ship> enemyShips;
+	protected ArrayList<PowerUp> powerUps;
 	protected PlayerShip playerShip;
 	protected int points;
 	protected int lifes;
@@ -44,6 +46,7 @@ public abstract class HolloWarsLevel extends GameScene {
 	@Override
 	public void onSetAsCurrent() {
 		enemyShips = new ArrayList<Ship>();
+		powerUps = new ArrayList<PowerUp>();
 		this.generateBackground();
 		this.generateUI();
 		
