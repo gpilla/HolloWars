@@ -28,6 +28,7 @@ public class EnemyShip extends Ship {
 		this.setAppearance(Sprite.fromImage("images/1942Sheet1.png").crop(92, 374, 12, 25).scaleTo(width, height));
 		this.setX(0);
 		this.setY(0);
+		this.setZ(30);
 		this.setSpawnTime(spawnTime);
 		
 		this.estategiaDeMovimiento.setShip(this);

@@ -18,6 +18,7 @@ public class Explotion extends GameComponent<HolloWarsLevel> {
 		this.setAppearance(animation);
 		this.alignHorizontalCenterTo(ship.getX());
 		this.alignVerticalCenterTo(ship.getY());
+		this.setZ(40);
 	}
 	
 	@Override

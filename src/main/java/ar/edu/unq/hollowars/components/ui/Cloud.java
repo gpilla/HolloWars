@@ -11,6 +11,10 @@ public class Cloud extends GameComponent<HolloWarsLevel>{
 
 	private double speed;
 	
+	public Cloud() {
+		this.setZ(100);
+	}
+	
 	@Override
 	public void onSceneActivated() {
 		resetCloud();

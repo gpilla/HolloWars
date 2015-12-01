@@ -4,8 +4,12 @@ import java.util.ArrayList;
 
 import com.uqbar.vainilla.GameComponent;
 import com.uqbar.vainilla.GameScene;
+import com.uqbar.vainilla.sound.Sound;
+import com.uqbar.vainilla.sound.SoundBuilder;
 
 import ar.edu.unq.hollowars.GameOverScene;
+import ar.edu.unq.hollowars.components.BossEnemyShip;
+import ar.edu.unq.hollowars.components.BossEnemyShipTurret;
 import ar.edu.unq.hollowars.components.EnemyShip;
 import ar.edu.unq.hollowars.components.PlayerShip;
 import ar.edu.unq.hollowars.components.Ship;
@@ -15,10 +19,12 @@ import ar.edu.unq.hollowars.components.strategies.MoveStrategy;
 import ar.edu.unq.hollowars.components.ui.Background;
 import ar.edu.unq.hollowars.components.ui.Cloud;
 import ar.edu.unq.hollowars.components.ui.DownIcon;
+import ar.edu.unq.hollowars.components.ui.EnemiesCountLabel;
 import ar.edu.unq.hollowars.components.ui.Explotion;
 import ar.edu.unq.hollowars.components.ui.Island;
 import ar.edu.unq.hollowars.components.ui.LifesLabel;
 import ar.edu.unq.hollowars.components.ui.PointsLabel;
+import ar.edu.unq.hollowars.components.ui.TimeLabel;
 import ar.edu.unq.hollowars.parser.ReadCSV;
 
 public abstract class HolloWarsLevel extends GameScene {
@@ -29,6 +35,11 @@ public abstract class HolloWarsLevel extends GameScene {
 	protected int lifes;
 	protected LifesLabel lifesLabel;
 	protected PointsLabel pointsLabel;
+	private Sound soundTrack;
+	
+	public HolloWarsLevel() {
+		this.setSoundTrack(new SoundBuilder().buildSound("/sounds/Richard_Wagner_Ride_of_the_Valkyries_original.wav"));
+	}
 	
 	@Override
 	public void onSetAsCurrent() {
@@ -41,7 +52,7 @@ public abstract class HolloWarsLevel extends GameScene {
 		
 		generatePlayer();
 		generateEnemies();
-		
+		this.getSoundTrack().play(1);
 		super.onSetAsCurrent();
 	}
 
@@ -59,6 +70,10 @@ public abstract class HolloWarsLevel extends GameScene {
 		this.addComponent(new DownIcon());
 		pointsLabel = new PointsLabel(700, 10);
 		this.addComponent(pointsLabel);
+		EnemiesCountLabel enemiesCountLabel = new EnemiesCountLabel(500, 10);
+		this.addComponent(enemiesCountLabel);
+		TimeLabel timeLabel = new TimeLabel(300, 10);
+		this.addComponent(timeLabel);
 	}
 	
 	private void generateBackground() {
@@ -70,6 +85,8 @@ public abstract class HolloWarsLevel extends GameScene {
 	}
 
 	private void generateEnemies() {
+		
+		
 		ArrayList<String[]> waves = null;
 		EnemyShip enemy = null;
 		
@@ -78,6 +95,21 @@ public abstract class HolloWarsLevel extends GameScene {
 		enemies.add(this.getPlayerShip());
 		EnemyBulletStrategy bulletStrategy = new EnemyBulletStrategy();
 		bulletStrategy.setEnemyShips(enemies);
+		
+		BossEnemyShip boss = new BossEnemyShip();
+		this.addComponent(boss);
+		
+		BossEnemyShipTurret turret = new BossEnemyShipTurret(27, 320*0.4, bulletStrategy);
+		boss.addTurret(turret);
+		this.addComponent(turret);
+		
+		turret = new BossEnemyShipTurret(27, 436*0.4, bulletStrategy);
+		boss.addTurret(turret);
+		this.addComponent(turret);
+		
+		turret = new BossEnemyShipTurret(27, 1020*0.4, bulletStrategy);
+		boss.addTurret(turret);
+		this.addComponent(turret);
 		
 		try {
 			waves = new ReadCSV("src/main/resources/config/levels/"+this.getClass().getSimpleName()+".csv").run();
@@ -184,7 +216,16 @@ public abstract class HolloWarsLevel extends GameScene {
 		for (GameComponent<?> component : this.getComponents()) {
 			component.destroy();
 		}
+		this.setSoundTrack(null);
 		this.getGame().setCurrentScene(new GameOverScene());
+	}
+
+	public Sound getSoundTrack() {
+		return soundTrack;
+	}
+
+	public void setSoundTrack(Sound sound) {
+		this.soundTrack = sound;
 	}
 	
 }

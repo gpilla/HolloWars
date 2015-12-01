@@ -12,19 +12,30 @@ import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 public class Bullet extends GameComponent<HolloWarsLevel> {
 	
 	private BulletStrategy bulletStrategy;
+	private double i;
+	private double j;
+	private double speed;
 	
 	// Bullet
 	public Bullet(double x, double y, BulletStrategy bulletStrategy) {
 		this.setBulletStrategy(bulletStrategy);
 		this.setAppearance(new Circle(bulletStrategy.getColor(), 8));
+		
 		this.setX(x);
 		this.setY(y);
+		this.setI(bulletStrategy.getI());
+		this.setJ(bulletStrategy.getJ());
+		this.setSpeed(bulletStrategy.getSpeed());
+		
+		this.setZ(50);
 	}
 	
 	@Override
 	public void update(DeltaState deltaState) {
 		
-		this.getBulletStrategy().move(deltaState, this);
+		double advanced = this.getSpeed() * deltaState.getDelta();
+		this.move(this.getI() * advanced, this.getJ() * advanced);
+		
 		if (!this.isDestroyPending()) {
 			this.checkColitions(deltaState);
 		}
@@ -50,6 +61,30 @@ public class Bullet extends GameComponent<HolloWarsLevel> {
 
 	public void setBulletStrategy(BulletStrategy bulletStrategy) {
 		this.bulletStrategy = bulletStrategy;
+	}
+
+	public double getI() {
+		return i;
+	}
+
+	public void setI(double i) {
+		this.i = i;
+	}
+
+	public double getJ() {
+		return j;
+	}
+
+	public void setJ(double j) {
+		this.j = j;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 	
 }

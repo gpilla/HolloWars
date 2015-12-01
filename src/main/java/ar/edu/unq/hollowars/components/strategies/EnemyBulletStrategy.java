@@ -16,7 +16,7 @@ public class EnemyBulletStrategy extends BulletStrategy {
 	public EnemyBulletStrategy() {
 		this.setI(0);
 		this.setJ(1);
-		this.setSpeed(100);
+		this.setSpeed(200);
 		this.setColor(Color.RED);
 		
 		this.setSound(new SoundBuilder().buildSound("/sounds/raygun-01.wav"));
