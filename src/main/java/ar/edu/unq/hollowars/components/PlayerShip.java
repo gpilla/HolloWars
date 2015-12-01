@@ -17,6 +17,7 @@ public class PlayerShip extends Ship {
 	public static final int SPEED = 300;
 	public static final int NAVE_HEIGHT = 50;
 	public static final int NAVE_WIDTH = 30;
+	private ArrayList<?> batmanList = new ArrayList<Key>();
 	
 	
 	public PlayerShip() {
@@ -60,6 +61,21 @@ public class PlayerShip extends Ship {
 		}
 		if(deltaState.isKeyBeingHold(Key.CTRL)) {
 			this.shoot(deltaState.getDelta());
+		}
+		
+		if(deltaState.isKeyBeingHold(Key.TAB)) {
+			this.setAppearance(Sprite.fromImage("images/1942Sheet1.png").crop(95, 127, 30, 30).scaleTo(50, 50));
+		}
+		if(deltaState.isKeyBeingHold(Key.Q) && deltaState.isKeyBeingHold(Key.P))
+		{
+			this.setAppearance(Sprite.fromImage("images/1942Sheet1.png").crop(34, 10, 23, 16).scaleTo(50, 50));
+		}
+		
+
+	}
+	private void addBatman(Key letra){
+		if(batmanList.isEmpty() && letra.equals(Key.N)){
+//			batmanList.add(letra);
 		}
 	}
 	
