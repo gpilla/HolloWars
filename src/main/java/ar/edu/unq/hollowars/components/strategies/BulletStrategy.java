@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import com.uqbar.vainilla.DeltaState;
+import com.uqbar.vainilla.sound.Sound;
 
 import ar.edu.unq.hollowars.components.Ship;
 import ar.edu.unq.hollowars.components.ships.guns.Bullet;
@@ -16,6 +17,7 @@ public abstract class BulletStrategy {
 	private double i, j;
 	
 	private ArrayList<Ship> enemyShips;
+	private Sound sound;
 	
 	public abstract void checkColitions(DeltaState deltaState, Bullet bullet);
 
@@ -62,6 +64,14 @@ public abstract class BulletStrategy {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public Sound getSound() {
+		return sound;
+	}
+
+	public void setSound(Sound sound) {
+		this.sound = sound;
 	}
 	
 }
