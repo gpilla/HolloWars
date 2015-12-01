@@ -7,7 +7,6 @@ import com.uqbar.vainilla.DeltaState;
 
 import ar.edu.unq.hollowars.components.Ship;
 import ar.edu.unq.hollowars.components.ships.guns.Bullet;
-import ar.edu.unq.hollowars.levels.HolloWarsLevel;
 
 public abstract class BulletStrategy {
 	
@@ -31,9 +30,6 @@ public abstract class BulletStrategy {
 	public void move(DeltaState deltaState, Bullet bullet) {
 		double advanced = this.getSpeed() * deltaState.getDelta();
 		bullet.move(this.getI() * advanced, this.getJ() * advanced);
-		if(this.getSpeed() > 100 ) {
-			System.out.println(this.getSpeed());
-		}
 	}
 
 	public double getI() {

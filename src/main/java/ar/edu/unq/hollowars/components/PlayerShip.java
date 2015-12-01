@@ -26,7 +26,7 @@ public class PlayerShip extends Ship {
 
 		this.setX(100);
 		this.setY(100);
-		
+		this.setZ(30);
 		this.setBulletStrategy(new PlayerBulletStrategy());
 	}
 	
